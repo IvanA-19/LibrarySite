@@ -1,0 +1,266 @@
+/* Общие стили */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding-top: 60px;
+    background-color: #f4f4f4;
+}
+a {
+    text-decoration: none;
+    color: #333;
+}
+a:hover {
+    color: #007bff;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Стили навигации */
+.navbar {
+    background-color: #343a40; /* Темный фон */
+    color: white;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+.nav-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+}
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.nav-item {
+    margin-left: 20px;
+}
+.nav-link {
+    color: white;
+    text-decoration: none;
+}
+.nav-link:hover {
+  color: #ccc;
+}
+
+/* Стили для списка книг */
+.book-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+.book-cover-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.book-card img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.book-card .card-body {
+    padding: 15px;
+}
+.book-card .card-body .card-title {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+.book-card .card-body .card-text {
+    margin-bottom: 10px;
+}
+.book-card .card-body .btn-link {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.book-card .card-body .btn-link:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для детальной страницы книги */
+.book-detail {
+   background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+.book-detail img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+    object-fit: cover;
+}
+
+/* Стили для форм (регистрации и входа) */
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+form input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+form button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Стили для сообщений */
+.messages {
+    margin: 20px auto;
+    max-width: 600px;
+}
+.alert {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+/* Стили для профиля пользователя */
+.profile {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+.profile-container {
+   display: flex;
+   gap: 20px;
+   align-items: center;
+}
+.avatar-container {
+  width: 200px;
+   height: 200px;
+   overflow: hidden;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.avatar-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.profile-content-container {
+   text-align: left;
+}
+/*Стили для кнопок*/
+.btn-link {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.btn-link:hover {
+    background-color: #0056b3;
+}
+/* Стили для главной страницы */
+.home {
+    text-align: center;
+    padding: 50px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.home h1 {
+    margin-bottom: 20px;
+}
+.home p {
+    margin-bottom: 20px;
+}
+/*swiper-slider*/
+.swiper {
+        max-width: 800px;
+        margin: 0 auto;
+        overflow: hidden;
+        position: relative;
+        margin-bottom: 20px;
+    }
+.swiper-slide {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column; /* располагаем элементы вертикально */
+      }
+.swiper-slide-info {
+     text-align: center; /* центрируем текст под картинкой */
+     padding: 10px;
+}
+.swiper-slide-info h5 {
+   margin-bottom: 10px;
+}
+.swiper-button-next,
+.swiper-button-prev {
+    color: white;
+}
+.library-description {
+    text-align: left;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

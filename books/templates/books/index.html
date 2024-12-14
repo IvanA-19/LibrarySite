@@ -1,0 +1,45 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block content %}
+    <div class="home">
+        <h1>Добро пожаловать в нашу библиотеку!</h1>
+        <p>Здесь вы можете найти книги на любой вкус.</p>
+
+        <div class="swiper mySwiper mb-4">
+            <div class="swiper-wrapper">
+                {% for book in recommended_books %}
+                  <div class="swiper-slide">
+                     {% if book.cover_image %}
+                          <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" style="max-height: 200px; object-fit: cover">
+                       {% else %}
+                           <img src="{% static 'img/no_image.png' %}" alt="No image" style="max-height: 200px; object-fit: cover;">
+                      {% endif %}
+                      <div class="swiper-slide-info">
+                         <h5>{{ book.title }}</h5>
+                          <p>
+                             {% for author in book.authors.all %}
+                                 {{ author.first_name }} {{ author.last_name }}{% if not forloop.last %}, {% endif %}
+                             {% endfor %}
+                          </p>
+                            <p>{{ book.description|truncatewords:15 }}</p>
+                         <a href="{% url 'books:book_detail' book.slug %}" class="btn-link">Подробнее</a>
+                       </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+
+        <div class="library-description mb-4">
+            <h2>О нашей библиотеке</h2>
+            <p>
+                Наша библиотека предоставляет широкий выбор книг разных жанров. Мы стремимся сделать чтение доступным для каждого. У нас вы найдете как классические произведения, так и новинки литературы. Присоединяйтесь к нашему сообществу и наслаждайтесь чтением!
+            </p>
+        </div>
+
+    </div>
+{% endblock %}

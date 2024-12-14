@@ -1,0 +1,48 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block title %}Список книг{% endblock %}
+
+{% block content %}
+    <h1>Список книг</h1>
+    <div class="row">
+        {% for book in books %}
+            <div class="col-md-4 mb-4">
+                <div class="book-card">
+                    <div class="book-cover-container"> <!-- Добавляем контейнер -->
+                        {% if book.cover_image %}
+                           <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" >
+                        {% else %}
+                            <img src="{% static 'img/no_image.png' %}" alt="No image" >
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text">
+                            <b>Автор:</b>
+                            {% for author in book.authors.all %}
+                              <a href="{% url 'books:book_list_by_author' author.id %}">
+                                 {{ author.first_name }} {{ author.last_name }}{% if not forloop.last %}, {% endif %}
+                              </a>
+                            {% endfor %}
+                           <br>
+                           <b>Жанры:</b>
+                             {% for genre in book.genre.all %}
+                                <a href="{% url 'books:book_list_by_genre' genre.id %}">
+                                    {{ genre.name }}{% if not forloop.last %}, {% endif %}
+                                 </a>
+                             {% endfor %}
+                        </p>
+                        <a href="{% url 'books:book_detail' book.slug %}" class="btn-link">Подробнее</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% if genre %}
+    <a class="btn-link mt-3" href="{% url 'books:book_list' %}">Вернуться к списку книг</a>
+    {% endif %}
+    {% if author %}
+    <a class="btn-link mt-3" href="{% url 'books:book_list' %}">Вернуться к списку книг</a>
+    {% endif %}
+{% endblock %}

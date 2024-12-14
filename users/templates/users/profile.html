@@ -1,0 +1,48 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+    <div class="profile">
+        <h1>Профиль пользователя</h1>
+         <div class="profile-container">
+           <div class="avatar-container">
+                {% if profile.avatar %}
+                   <img src="{{ profile.avatar.url }}" alt="user_avatar" class="avatar-img">
+                {% else %}
+                    <img src="{% static 'img/no_image.png' %}" alt="No image" class="avatar-img">
+                {% endif %}
+           </div>
+           <div class="profile-content-container">
+             <h3>{{ profile.username }}</h3>
+             <h4>Имя: {{ profile.first_name }}</h4>
+             <h4>Фамилия: {{ profile.last_name }}</h4>
+             <h4>Email: {{ profile.email }}</h4>
+             {% if profile.phone_number %}
+                <h4>Номер телефона: {{ profile.phone_number }}</h4>
+             {% endif %}
+             <a href="{% url 'users:edit_profile' %}" class="btn-link">Редактировать профиль</a>
+         </div>
+        </div>
+      <h2>Забронированные книги</h2>
+      {% if user.borrowing_set.all %}
+          <ul>
+               {% for borrowing in user.borrowing_set.all %}
+                    <li>
+                         {{ borrowing.book.title }} (забронировано: {{ borrowing.borrow_date }})
+                         {% if not borrowing.is_returned %}
+                              <form method="post" action="{% url 'borrow:return_book' borrowing.id %}">
+                                   {% csrf_token %}
+                                       <button type="submit" class="btn-link">Вернуть</button>
+                              </form>
+                         {% endif %}
+                    </li>
+               {% endfor %}
+           </ul>
+       {% else %}
+            <p>У вас нет забронированных книг.</p>
+       {% endif %}
+    </div>
+
+{% endblock %}

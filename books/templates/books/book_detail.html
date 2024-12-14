@@ -1,0 +1,61 @@
+{% extends 'books/base.html' %}
+{% load static %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ book.title }}</h1>
+    <div class="book-detail">
+        <div class="row">
+            <div class="col-md-4">
+                {% if book.cover_image %}
+                 <img src="{{ book.cover_image.url }}" alt="{{ book.title }}" style="max-height: 400px;">
+                {% else %}
+                    <img src="{% static 'img/no_image.png' %}" alt="No image" style="max-height: 300px; object-fit: cover;">
+                {% endif %}
+            </div>
+            <div class="col-md-8">
+              <p><b>Автор:</b>
+                  {% for author in book.authors.all %}
+                    {{ author.first_name }} {{ author.last_name }}{% if not forloop.last %}, {% endif %}
+                  {% endfor %}
+                </p>
+                <p><b>Жанры:</b>
+                    {% for genre in book.genre.all %}
+                        {{ genre.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+                <p><b>ISBN:</b> {{ book.isbn }}</p>
+                {% if book.publisher %}
+                    <p><b>Издательство:</b> {{ book.publisher.name }}</p>
+                {% endif %}
+                {% if book.publication_date %}
+                    <p><b>Дата публикации:</b> {{ book.publication_date }}</p>
+                {% endif %}
+                <p><b>Описание:</b> {{book.description}}</p>
+                <p><b>В наличии:</b> {{book.quantity}}</p>
+                  {% if user.is_authenticated %}
+                    {% if borrowed %}
+                        <p>Вы уже забронировали эту книгу.</p>
+                         {% for borrowing in user.borrowing_set.all %}
+                             {% if borrowing.book == book and not borrowing.is_returned %}
+                               <form method="post" action="{% url 'borrow:return_book' borrowing.id %}">
+                                    {% csrf_token %}
+                                      <button type="submit" class="btn-link">Вернуть</button>
+                                </form>
+                             {% endif %}
+                           {% endfor %}
+                    {% elif book.quantity > 0 %}
+                       <form method="post" action="{% url 'borrow:borrow_book' book.slug %}">
+                         {% csrf_token %}
+                         <button type="submit" class="btn-link">Забронировать</button>
+                       </form>
+                    {% else %}
+                       <p>Книга в данный момент не доступна для бронирования.</p>
+                    {% endif %}
+                 {% endif %}
+                <a href="{% url 'books:book_list' %}" class="btn-link mt-3">Назад к списку</a>
+           </div>
+       </div>
+    </div>
+{% endblock %}
